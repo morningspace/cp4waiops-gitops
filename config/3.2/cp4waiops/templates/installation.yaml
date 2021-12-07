@@ -15,6 +15,94 @@ spec:
   pakModules:
   - name: aiopsFoundation
     enabled: false
+    config:
+      - name: couchdb
+        spec:
+          couchdbcluster:
+            resources:
+              db:
+                requests:
+                  memory: "768Mi"
+                  cpu: "250m"
+                limits:
+                  memory: "768Mi"
+                  cpu: "700m"
+              search:
+                requests:
+                  memory: "250Mi"
+                  cpu: "250m"
+                limits:
+                  memory: "250Mi"
+                  cpu: "500m"
+              mgmt:
+                requests:
+                  memory: "64Mi"
+                  cpu: "250m"
+                limits:
+                  memory: "128Mi"
+                  cpu: "500m"
+      - name: redis
+        spec:
+          redissentinel:
+            resources:
+              member:
+                db:
+                  limits:
+                    cpu: "500m"
+                    memory: 512Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 256Mi
+                mgmt:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
+                proxy:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
+                proxylog:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
+              sentinel:
+                db:
+                  limits:
+                    cpu: "500m"
+                    memory: 512Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 256Mi
+                mgmt:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
+                proxy:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
+                proxylog:
+                  limits:
+                    cpu: "500m"
+                    memory: 150Mi
+                  requests:
+                    cpu: "60m"
+                    memory: 100Mi
   - name: applicationManager
     enabled: false
   - name: aiManager
