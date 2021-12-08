@@ -3,6 +3,7 @@ kind: AutomationBase
 metadata:
   annotations:
     aiops.ibm.com/installedBy: cp4waiops
+    argocd.argoproj.io/sync-wave: "120"
   name: automationbase-custom
   namespace: {{.Values.spec.cp4waiops_namespace}}
 spec:
