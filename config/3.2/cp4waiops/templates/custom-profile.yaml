@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cp4waiops-image-pull-secret
+  name: custom-profile
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   namespace: {{.Values.spec.cp4waiops_namespace}}
