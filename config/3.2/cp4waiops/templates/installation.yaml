@@ -104,6 +104,164 @@ spec:
                     cpu: "60m"
                     memory: 100Mi
   - name: applicationManager
+    config:
+      - name: ir-lifecycle-operator
+        spec:
+          lifecycleservice:
+            customSizing:
+              logstash:
+                resourceLimitsCPU: 625m
+                resourceLimitsMemory: 1Gi
+                resourceRequestsCPU: 250m
+                resourceRequestsMemory: 600Mi
+              taskManager:
+                resourceLimitsCPU: 500m
+                resourceLimitsMemory: 1Gi
+                resourceRequestsCPU: 250m
+                resourceRequestsMemory: 1Gi
+              jobManager:
+                resourceLimitsCPU: 600m
+                resourceLimitsMemory: 768Mi
+                resourceRequestsCPU: 100m
+                resourceRequestsMemory: 512Mi
+      - name: ir-ai-operator
+        spec:
+          aiopsanalyticsorchestrator:
+            customSizing:
+              deployments:
+                - name: probablecause
+                  replicas: 1
+                  containers:
+                  - name: probablecause
+                    requests:
+                      cpu: 800m
+                      memory: 750Mi
+                    limits:
+                      cpu: 1000m
+                      memory: 1Gi
+                - name: classifier
+                  replicas: 1
+                  containers:
+                  - name: classifier
+                    requests:
+                      cpu: 800m
+                      memory: 750Mi
+                    limits:
+                      cpu: "1"
+                      memory: 1000Mi
+                - name: spark-worker
+                  replicas: 1
+                  containers:
+                  - name: spark-worker
+                    requests:
+                      cpu: 350m
+                      memory: 1000Mi
+                    limits:
+                      cpu: "1"
+                      memory: 1000Mi
+                - name: spark-pipeline-composer
+                  replicas: 1
+                  containers:
+                  - name: spark-pipeline-composer
+                    requests:
+                      cpu: 250m
+                      memory: 500Mi
+                    limits:
+                      cpu: 250m
+                      memory: 500Mi
+      - name: ir-core-operator
+        spec:
+          issueresolutioncore:
+            customSizing:
+              deployments:
+                - name: ncodl-api
+                  replicas: 1
+                  containers:
+                  - name: api
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: ncodl-if
+                  replicas: 1
+                  containers:
+                  - name: iducforward
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: ncodl-ir
+                  replicas: 1
+                  containers:
+                  - name: iducrelay
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: ncodl-jobmgr
+                  replicas: 1
+                  containers:
+                  - name: jobmgr
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: ncodl-std
+                  replicas: 1
+                  containers:
+                  - name: standard
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: logstash
+                  replicas: 1
+                  containers:
+                  - name: logstash
+                    requests:
+                      cpu: 100m
+                      memory: 700Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1400Mi
+              statefulSets:
+                - name: ncobackup
+                  replicas: 1
+                  containers:
+                  - name: agg-gate
+                    requests:
+                      cpu: 50m
+                      memory: 256Mi
+                    limits:
+                      cpu: 500m
+                      memory: 512Mi
+                  - name: objserv
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi
+                - name: ncoprimary
+                  replicas: 1
+                  containers:
+                  - name: objserv
+                    requests:
+                      cpu: 125m
+                      memory: 512Mi
+                    limits:
+                      cpu: 500m
+                      memory: 1024Mi  
     enabled: false
   - name: aiManager
     enabled: false

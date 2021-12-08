@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: aiops-topology-sizing
+  namespace: {{.Values.spec.cp4waiops_namespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "120"
+data:
+  asm: |
+    "cassandra":
+      specs:
+        replicas: 1
+      containers:
+        "cassandra":
+          resources:
+            limits:
+              cpu: 600m
+              memory: 1500Mi
+            requests:
+              cpu: 200m
+              memory: 1500Mi
+          env:
+            - name: CASSANDRA_HEAP_SIZE
+              value: 600M
+            - name: CASSANDRA_HEAP_NEWSIZE
+              value: 150M
