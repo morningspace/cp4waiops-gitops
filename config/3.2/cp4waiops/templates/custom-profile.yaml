@@ -18,8 +18,8 @@ spec:
               memory: "64Mi"
               cpu: "100m"
             limits:
-              memory: "64Mi"
-              cpu: "200m"
+              memory: "128Mi"
+              cpu: "250m"
           command:
             - /bin/sh
             - -c
@@ -46,11 +46,6 @@ spec:
                 replicas=$(oc get deploy zen-core-api -n $ns -o jsonpath="{.spec.replicas}")
                 if [[ $replicas != 1 ]]; then
                   oc patch deploy zen-core-api -n $ns --type=merge -p '{"spec": {"replicas": 1}}'
-                fi
-
-                replicas=$(oc get redissentinel example-redis -n $ns -o jsonpath="{.spec.size}")
-                if [[ $replicas != 1 ]]; then
-                  oc patch redissentinel example-redis -n $ns --type=merge -p '{"spec": {"size": 1}}'
                 fi
 
                 replicas=$(oc get deploy aiopsedge-operator-controller-manager -n $ns -o jsonpath="{.spec.replicas}")
