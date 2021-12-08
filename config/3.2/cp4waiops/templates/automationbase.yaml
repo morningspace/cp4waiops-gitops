@@ -1,0 +1,103 @@
+apiVersion: base.automation.ibm.com/v1beta1
+kind: AutomationBase
+metadata:
+  annotations:
+    aiops.ibm.com/installedBy: cp4waiops
+  name: automationbase-custom
+  namespace: {{.Values.spec.cp4waiops_namespace}}
+spec:
+  elasticsearch:
+    additionalAllowedAPIs: "GET:[cat_alias_action, cat_count_action, cat_health_action, cat_indices_action, cat_shards_action, cat_tasks_action, cluster_allocation_explain_action, cluster_get_settings_action, cluster_health_action, cluster_state_action, count_action, document_get_action, document_get_source_action, explain_action, flush_action, get_aliases_action, get_field_mapping_action, get_indices_action, get_mapping_action, get_settings_action, get_task_action, indices_stats_action, list_tasks_action, nodes_info_action, nodes_stats_action, refresh_action, search_action, search_scroll_action],PUT:[bulk_action, cluster_update_settings_action, create_index_action, document_create_action, document_index_action, index_put_alias_action, put_mapping_action, update_settings_action],POST:[bulk_action, cancel_tasks_action, count_action, delete_by_query_action, document_create_action_auto_id, document_create_action, document_index_action, document_update_action, explain_action, flush_action, index_put_alias_action, indices_aliases_action, put_mapping_action, refresh_action, reindex_action, rollover_index_action, search_action, search_scroll_action, update_by_query_action],HEAD:[document_get_action, document_get_source_action, get_aliases_action, get_indices_action, get_mapping_action, main_action],DELETE:[clear_scroll_action, delete_index_action, document_delete_action, index_delete_aliases_action]"
+    license:
+      accept: true
+    nodegroupspecs:
+    - config:
+      - key: node.master
+        value: "true"
+      - key: node.data
+        value: "true"
+      name: aiops
+      replicas: 1
+      storage:
+        class: {{.Values.spec.storageClass}}
+      template:
+        pod:
+          spec:
+            containers:
+            - env:
+              - name: ES_JAVA_OPTS
+                value: -Xms512M -Xmx512M
+              name: elasticsearch
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 1Gi
+                requests:
+                  cpu: 250m
+                  memory: 1Gi
+            - name: tls-proxy
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 200Mi
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    tls: {}
+    version: v1.1
+  kafka:
+    entityOperator:
+      tlsSidecar:
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+      topicOperator:
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+      userOperator:
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+    kafka:
+      config:
+        default.replication.factor: 1
+        min.insync.replicas: 1
+      replicas: 1
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 500Mi
+      storage:
+        class: {{.Values.spec.storageClass}}
+        size: 30Gi
+    zookeeper:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 256Mi
+        requests:
+          cpu: 50m
+          memory: 256Mi
+      storage:
+        class: {{.Values.spec.storageClass}}
+  license:
+    accept: true
+  tls: {}
+  version: v1.1

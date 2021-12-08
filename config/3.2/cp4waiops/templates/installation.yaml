@@ -6,6 +6,8 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:
+  automationFoundation:
+    automationBase: automationbase-custom
   size: {{.Values.spec.size}}
   storageClass: {{.Values.spec.storageClass}}
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
