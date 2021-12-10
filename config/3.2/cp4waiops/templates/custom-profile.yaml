@@ -54,7 +54,7 @@ spec:
                   oc patch deploy aiopsedge-operator-controller-manager -n $ns --type=merge -p '{"spec": {"replicas": 1}}' && flags+=("aiopsedge-operator-controller-manager")
                 fi
 
-                [[ ${#flags[@]} == 5]] && break || sleep 10s
+                [[ ${#flags[@]} == 5]] && break || sleep 10
               done
 
       restartPolicy: Never
