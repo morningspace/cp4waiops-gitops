@@ -55,8 +55,9 @@ spec:
                 fi
 
                 if [[ ${#flags[@]} == 5]]; then
-                  sleep 10s
                   break
+                else
+                  sleep 10s
                 fi
               done
 
