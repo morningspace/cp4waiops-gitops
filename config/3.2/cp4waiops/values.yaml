@@ -47,3 +47,226 @@ spec:
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
   ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
   storageClassLargeBlock: rook-cephfs
+
+  cassandra:
+    replicas: 1
+    limits:
+      cpu: 600m
+      memory: 1500Mi
+    requests:
+      cpu: 200m
+      memory: 1500Mi
+
+  couchdb:
+    db:
+      limits:
+        memory: "768Mi"
+        cpu: "700m"
+      requests:
+        memory: "768Mi"
+        cpu: "250m"
+    search:
+      limits:
+        memory: "250Mi"
+        cpu: "500m"
+      requests:
+        memory: "250Mi"
+        cpu: "250m"
+    mgmt:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+
+  redis:
+    member:
+      db:
+        limits:
+          cpu: "500m"
+          memory: 512Mi
+        requests:
+          cpu: "60m"
+          memory: 256Mi
+      mgmt:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+      proxy:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+      proxylog:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+    sentinel:
+      db:
+        limits:
+          cpu: "500m"
+          memory: 512Mi
+        requests:
+          cpu: "60m"
+          memory: 256Mi
+      mgmt:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+      proxy:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+      proxylog:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 100Mi
+
+  lifecycleservice:
+    logstash:
+      limits:
+        cpu: 625m
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 600Mi
+    taskManager:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
+    jobManager:
+      limits:
+        cpu: 600m
+        memory: 768Mi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+
+  probablecause:
+    replicas: 1
+    requests:
+      cpu: 800m
+      memory: 750Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  classifier:
+    replicas: 1
+    requests:
+      cpu: 800m
+      memory: 750Mi
+    limits:
+      cpu: "1"
+      memory: 1000Mi
+  spark-worker:
+    replicas: 1
+    requests:
+      cpu: 350m
+      memory: 1000Mi
+    limits:
+      cpu: "1"
+      memory: 1000Mi
+  spark-pipeline-composer:
+    replicas: 1
+    requests:
+      cpu: 250m
+      memory: 500Mi
+    limits:
+      cpu: 250m
+      memory: 500Mi
+
+  ncodl-api:
+    replicas: 1
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  ncodl-if:
+    replicas: 1
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  ncodl-ir:
+    replicas: 1
+    requests:
+      cpu: 50m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  ncodl-jobmgr:
+    replicas: 1
+    requests:
+      cpu: 50m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  ncodl-std:
+    replicas: 1
+    requests:
+      cpu: 50m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  logstash:
+    replicas: 1
+    requests:
+      cpu: 100m
+      memory: 700Mi
+    limits:
+      cpu: 500m
+      memory: 1400Mi
+  ncobackup:
+    replicas: 1
+    containers:
+    - name: agg-gate
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+    - name: objserv
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        cpu: 500m
+        memory: 1024Mi
+  ncoprimary:
+    replicas: 1
+    requests:
+      cpu: 125m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi  
+  
