@@ -148,7 +148,7 @@ spec:
                       memory: 750Mi
                     limits:
                       cpu: "1"
-                      memory: 1000Mi
+                      memory: 2048Mi
                 - name: spark-worker
                   replicas: 1
                   containers:
@@ -169,6 +169,8 @@ spec:
                     limits:
                       cpu: 250m
                       memory: 500Mi
+            pullSecrets:
+            - ibm-entitlement-key
       - name: ir-core-operator
         spec:
           issueresolutioncore:
