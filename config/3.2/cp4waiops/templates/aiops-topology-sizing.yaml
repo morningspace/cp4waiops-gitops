@@ -9,16 +9,16 @@ data:
   asm: |
     "cassandra":
       specs:
-        replicas: {{.Values.spec.cassandra.replicas}}
+        replicas: {{.Values.res.cassandra.replicas}}
       containers:
         "cassandra":
           resources:
             limits:
-              cpu: {{.Values.spec.cassandra.limits.cpu}}
-              memory: {{.Values.spec.cassandra.limits.memory}}
+              cpu: {{.Values.res.cassandra.limits.cpu}}
+              memory: {{.Values.res.cassandra.limits.memory}}
             requests:
-              cpu: {{.Values.spec.cassandra.requests.cpu}}
-              memory: {{.Values.spec.cassandra.requests.memory}}
+              cpu: {{.Values.res.cassandra.requests.cpu}}
+              memory: {{.Values.res.cassandra.requests.memory}}
           env:
             - name: CASSANDRA_HEAP_SIZE
               value: 600M
