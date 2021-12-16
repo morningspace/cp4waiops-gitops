@@ -57,3 +57,5 @@ spec:
                 if [[ $replicas != 1 ]]; then
                   oc patch deploy aiopsedge-operator-controller-manager -n $ns --type=merge -p '{"spec": {"replicas": 1}}'
                 fi
+
+                exit 0
