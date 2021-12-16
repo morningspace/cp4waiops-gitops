@@ -67,5 +67,5 @@ spec:
               oc delete pod $res -n $ns
             fi
       restartPolicy: Never
-      serviceAccountName: {{.Values.serviceaccount.argocd_application_controller}}
+      serviceAccountName: openshift-argocd-admin
   backoffLimit: 1
