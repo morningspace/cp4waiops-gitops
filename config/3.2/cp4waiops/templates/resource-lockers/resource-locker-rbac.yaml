@@ -1,20 +1,14 @@
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: openshift-argocd-admin
-  namespace: {{.Values.spec.cp4waiops_namespace}}
----
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: openshift-argocd-admin
+  name: resource-locker-operator
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 subjects:
   - kind: ServiceAccount
-    name: openshift-argocd-admin
-    namespace: {{.Values.spec.cp4waiops_namespace}}
+    name: resource-locker-operator-controller-manager
+    namespace: resource-locker-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
