@@ -21,6 +21,6 @@ data:
               memory: {{.Values.res.cassandra.requests.memory}}
           env:
             - name: CASSANDRA_HEAP_SIZE
-              value: 600M
+              value: {{.Values.res.cassandra.heap.size}}
             - name: CASSANDRA_HEAP_NEWSIZE
-              value: 150M
+              value: {{.Values.res.cassandra.heap.newSize}}

@@ -57,6 +57,9 @@ res:
     requests:
       cpu: 200m
       memory: 1500Mi
+    heap:
+      size: 600M
+      newSize: 150M
 
   couchdb:
     db:
