@@ -7,119 +7,57 @@ spec:
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
   patches:
-  - targetObjectRef:
-      apiVersion: ai.ir.aiops.ibm.com/v1beta1
-      kind: AIOpsAnalyticsOrchestrator
-      name: aiops
-      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: nginx-replicas
     patchTemplate: |
       spec:
-        pullSecrets:
-        - ibm-entitlement-key
+        replicas: 1
     patchType: application/strategic-merge-patch+json
-    id: aiopsanalyticsorchestrator-image-pull-secret
-  - targetObjectRef:
-      apiVersion: v1
-      kind: ServiceAccount
-      name: aiops-topology-service-account
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-    patchTemplate: |
-      imagePullSecrets:
-      - name: ibm-entitlement-key
-      metadata:
-        labels:
-          managedByUser: "true"
-    patchType: application/strategic-merge-patch+json
-    id: sa-image-pull-secret
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: ibm-nginx
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: usermgmt-replicas
     patchTemplate: |
       spec:
         replicas: 1
     patchType: application/strategic-merge-patch+json
-    id: nginx-replicas
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: usermgmt
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: zen-core-replicas
     patchTemplate: |
       spec:
         replicas: 1
     patchType: application/strategic-merge-patch+json
-    id: usermgmt-replicas
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: zen-core
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: zen-core-api-replicas
     patchTemplate: |
       spec:
         replicas: 1
     patchType: application/strategic-merge-patch+json
-    id: zen-core-replicas
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: zen-core-api
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aiopsedge-operator-controller-manager-replicas
     patchTemplate: |
       spec:
         replicas: 1
     patchType: application/strategic-merge-patch+json
-    id: zen-core-api-replicas
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: aiopsedge-operator-controller-manager
       namespace: {{.Values.spec.cp4waiops_namespace}}
-    patchTemplate: |
-      spec:
-        replicas: 1
-    patchType: application/strategic-merge-patch+json
-    id: aiopsedge-operator-controller-manager-replicas
-  - targetObjectRef:
-      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
-      kind: AIManagerMainProd
-      name: aimanager
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-    patchTemplate: |
-      spec:
-        helmValues:
-          changeRisk:
-            resources:
-              limits:
-                cpu: 750m
-                memory: 1400Mi
-              requests:
-                cpu: 500m
-                memory: 1000Mi
-          logAnomaly:
-            resources:
-              limits:
-                cpu: 500m
-                memory: 1024Mi
-              requests:
-                cpu: 250m
-                memory: 256Mi
-          aiPlatformApiServer:
-            resources:
-              requests:
-                memory: 512Mi
-                cpu: 100m
-              limits:
-                memory: 1Gi
-                cpu: 200m
-    patchType: application/strategic-merge-patch+json
-    id: aimanager-custom-profile
-  - targetObjectRef:
-      apiVersion: base.automation.ibm.com/v1beta1
-      kind: AutomationBase
-      name: automationbase-sample
-      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: automationbase-custom-profile
     patchTemplate: |
       spec:
         elasticsearch:
@@ -209,12 +147,36 @@ spec:
             storage:
               class: rook-cephfs
     patchType: application/strategic-merge-patch+json
-    id: automationbase-custom-profile
-  - targetObjectRef:
-      apiVersion: eventprocessing.automation.ibm.com/v1beta1
-      kind: EventProcessor
-      name: cp4waiops-eventprocessor
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aiopsanalyticsorchestrator-image-pull-secret
+    patchTemplate: |
+      spec:
+        pullSecrets:
+        - ibm-entitlement-key
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: ai.ir.aiops.ibm.com/v1beta1
+      kind: AIOpsAnalyticsOrchestrator
+      name: aiops
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: sa-image-pull-secret
+    patchTemplate: |
+      imagePullSecrets:
+      - name: ibm-entitlement-key
+      metadata:
+        labels:
+          managedByUser: "true"
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: v1
+      kind: ServiceAccount
+      name: aiops-topology-service-account
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: cp4waiops-eventprocessor-custom-profile
     patchTemplate: |
       spec:
         flink:
@@ -261,12 +223,12 @@ spec:
                         cpu: 500m
                         memory: 1200Mi
     patchType: application/strategic-merge-patch+json
-    id: cp4waiops-eventprocessor-custom-profile
-  - targetObjectRef:
+    targetObjectRef:
       apiVersion: eventprocessing.automation.ibm.com/v1beta1
       kind: EventProcessor
-      name: aiops-ir-lifecycle
+      name: cp4waiops-eventprocessor
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aiops-ir-lifecycle-custom-profile
     patchTemplate: |
       spec:
         flink:
@@ -310,4 +272,42 @@ spec:
                         cpu: 250m
                         memory: 1Gi
     patchType: application/strategic-merge-patch+json
-    id: aiops-ir-lifecycle-custom-profile
+    targetObjectRef:
+      apiVersion: eventprocessing.automation.ibm.com/v1beta1
+      kind: EventProcessor
+      name: aiops-ir-lifecycle
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aimanager-custom-profile
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: 750m
+                memory: 1400Mi
+              requests:
+                cpu: 500m
+                memory: 1000Mi
+          logAnomaly:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1024Mi
+              requests:
+                cpu: 250m
+                memory: 256Mi
+          aiPlatformApiServer:
+            resources:
+              requests:
+                memory: 512Mi
+                cpu: 100m
+              limits:
+                memory: 1Gi
+                cpu: 200m
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: {{.Values.spec.cp4waiops_namespace}}
