@@ -1,0 +1,43 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanager-custom-profile
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: 750m
+                memory: 1400Mi
+              requests:
+                cpu: 500m
+                memory: 1000Mi
+          logAnomaly:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1024Mi
+              requests:
+                cpu: 250m
+                memory: 256Mi
+          aiPlatformApiServer:
+            resources:
+              requests:
+                memory: 512Mi
+                cpu: 100m
+              limits:
+                memory: 1Gi
+                cpu: 200m
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager

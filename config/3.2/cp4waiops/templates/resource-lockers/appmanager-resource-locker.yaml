@@ -1,0 +1,92 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-replicas
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aiopsanalyticsorchestrator-image-pull-secret
+    patchTemplate: |
+      spec:
+        pullSecrets:
+        - ibm-entitlement-key
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai.ir.aiops.ibm.com/v1beta1
+      kind: AIOpsAnalyticsOrchestrator
+      name: aiops
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: sa-image-pull-secret
+    patchTemplate: |
+      imagePullSecrets:
+      - name: ibm-entitlement-key
+      metadata:
+        labels:
+          managedByUser: "true"
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: v1
+      kind: ServiceAccount
+      name: aiops-topology-service-account
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  - id: aiops-ir-lifecycle-custom-profile
+    patchTemplate: |
+      spec:
+        flink:
+          jobManager: 
+            replicas: 1
+            template:
+              pod:
+                spec:
+                  containers:
+                  - name: jobmanager
+                    resources:
+                      limits:
+                        cpu: 600m
+                        memory: 768Mi
+                      requests:
+                        cpu: 100m
+                        memory: 512Mi
+                  - name: tls-proxy
+                    resources:
+                      limits:
+                        cpu: 500m
+                        memory: 512Mi
+                      requests:
+                        cpu: 100m
+                        memory: 256Mi
+          properties:
+             jobmanager.memory.process.size: 768mb
+             taskmanager.memory.process.size: 1gb
+          taskManager:
+            replicas: 1
+            template:
+              pod:
+                spec:
+                  containers:
+                  - name: taskmanager
+                    resources:
+                      limits:
+                        cpu: 500m
+                        memory: 1Gi
+                      requests:
+                        cpu: 250m
+                        memory: 1Gi
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: eventprocessing.automation.ibm.com/v1beta1
+      kind: EventProcessor
+      name: aiops-ir-lifecycle
+      namespace: {{.Values.spec.cp4waiops_namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager

@@ -1,7 +1,7 @@
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
 metadata:
-  name: cp4waiops-resource-locker
+  name: iaf-resource-locker
   namespace: resource-locker-operator
 spec:
   patches:
@@ -44,16 +44,6 @@ spec:
       apiVersion: apps/v1
       kind: Deployment
       name: zen-core-api
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiopsedge-operator-controller-manager-replicas
-    patchTemplate: |
-      spec:
-        replicas: 1
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: aiopsedge-operator-controller-manager
       namespace: {{.Values.spec.cp4waiops_namespace}}
   - id: automationbase-custom-profile
     patchTemplate: |
@@ -150,30 +140,6 @@ spec:
       kind: AutomationBase
       name: automationbase-sample
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiopsanalyticsorchestrator-image-pull-secret
-    patchTemplate: |
-      spec:
-        pullSecrets:
-        - ibm-entitlement-key
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: ai.ir.aiops.ibm.com/v1beta1
-      kind: AIOpsAnalyticsOrchestrator
-      name: aiops
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: sa-image-pull-secret
-    patchTemplate: |
-      imagePullSecrets:
-      - name: ibm-entitlement-key
-      metadata:
-        labels:
-          managedByUser: "true"
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: v1
-      kind: ServiceAccount
-      name: aiops-topology-service-account
-      namespace: {{.Values.spec.cp4waiops_namespace}}
   - id: cp4waiops-eventprocessor-custom-profile
     patchTemplate: |
       spec:
@@ -225,89 +191,6 @@ spec:
       apiVersion: eventprocessing.automation.ibm.com/v1beta1
       kind: EventProcessor
       name: cp4waiops-eventprocessor
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiops-ir-lifecycle-custom-profile
-    patchTemplate: |
-      spec:
-        flink:
-          jobManager: 
-            replicas: 1
-            template:
-              pod:
-                spec:
-                  containers:
-                  - name: jobmanager
-                    resources:
-                      limits:
-                        cpu: 600m
-                        memory: 768Mi
-                      requests:
-                        cpu: 100m
-                        memory: 512Mi
-                  - name: tls-proxy
-                    resources:
-                      limits:
-                        cpu: 500m
-                        memory: 512Mi
-                      requests:
-                        cpu: 100m
-                        memory: 256Mi
-          properties:
-             jobmanager.memory.process.size: 768mb
-             taskmanager.memory.process.size: 1gb
-          taskManager:
-            replicas: 1
-            template:
-              pod:
-                spec:
-                  containers:
-                  - name: taskmanager
-                    resources:
-                      limits:
-                        cpu: 500m
-                        memory: 1Gi
-                      requests:
-                        cpu: 250m
-                        memory: 1Gi
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: eventprocessing.automation.ibm.com/v1beta1
-      kind: EventProcessor
-      name: aiops-ir-lifecycle
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aimanager-custom-profile
-    patchTemplate: |
-      spec:
-        helmValues:
-          changeRisk:
-            resources:
-              limits:
-                cpu: 750m
-                memory: 1400Mi
-              requests:
-                cpu: 500m
-                memory: 1000Mi
-          logAnomaly:
-            resources:
-              limits:
-                cpu: 500m
-                memory: 1024Mi
-              requests:
-                cpu: 250m
-                memory: 256Mi
-          aiPlatformApiServer:
-            resources:
-              requests:
-                memory: 512Mi
-                cpu: 100m
-              limits:
-                memory: 1Gi
-                cpu: 200m
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
-      kind: AIManagerMainProd
-      name: aimanager
       namespace: {{.Values.spec.cp4waiops_namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
