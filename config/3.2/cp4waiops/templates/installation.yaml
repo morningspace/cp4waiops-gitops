@@ -21,26 +21,26 @@ spec:
           couchdbcluster:
             resources:
               db:
-                requests:
-                  memory: "768Mi"
-                  cpu: "250m"
                 limits:
-                  memory: "768Mi"
                   cpu: "700m"
+                  memory: "768Mi"
+                requests:
+                  cpu: "250m"
+                  memory: "768Mi"
               search:
-                requests:
-                  memory: "250Mi"
-                  cpu: "250m"
                 limits:
-                  memory: "250Mi"
                   cpu: "500m"
+                  memory: "250Mi"
+                requests:
+                  cpu: "250m"
+                  memory: "250Mi"
               mgmt:
-                requests:
-                  memory: "64Mi"
-                  cpu: "250m"
                 limits:
-                  memory: "128Mi"
                   cpu: "500m"
+                  memory: "128Mi"
+                requests:
+                  cpu: "250m"
+                  memory: "64Mi"
       - name: redis
         spec:
           redissentinel:
@@ -133,40 +133,40 @@ spec:
                   replicas: 1
                   containers:
                   - name: probablecause
-                    requests:
-                      cpu: 800m
-                      memory: 750Mi
                     limits:
                       cpu: 1000m
                       memory: 1Gi
+                    requests:
+                      cpu: 800m
+                      memory: 750Mi
                 - name: classifier
                   replicas: 1
                   containers:
                   - name: classifier
-                    requests:
-                      cpu: 800m
-                      memory: 750Mi
                     limits:
                       cpu: "1"
                       memory: 2048Mi
+                    requests:
+                      cpu: 800m
+                      memory: 750Mi
                 - name: spark-worker
                   replicas: 1
                   containers:
                   - name: spark-worker
-                    requests:
-                      cpu: 350m
-                      memory: 1000Mi
                     limits:
                       cpu: "1"
+                      memory: 1000Mi
+                    requests:
+                      cpu: 350m
                       memory: 1000Mi
                 - name: spark-pipeline-composer
                   replicas: 1
                   containers:
                   - name: spark-pipeline-composer
-                    requests:
+                    limits:
                       cpu: 250m
                       memory: 500Mi
-                    limits:
+                    requests:
                       cpu: 250m
                       memory: 500Mi
             pullSecrets:
@@ -180,90 +180,90 @@ spec:
                   replicas: 1
                   containers:
                   - name: api
-                    requests:
-                      cpu: 100m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
                 - name: ncodl-if
                   replicas: 1
                   containers:
                   - name: iducforward
-                    requests:
-                      cpu: 100m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
                 - name: ncodl-ir
                   replicas: 1
                   containers:
                   - name: iducrelay
-                    requests:
-                      cpu: 50m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
                 - name: ncodl-jobmgr
                   replicas: 1
                   containers:
                   - name: jobmgr
-                    requests:
-                      cpu: 50m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
                 - name: ncodl-std
                   replicas: 1
                   containers:
                   - name: standard
-                    requests:
-                      cpu: 50m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 50m
+                      memory: 512Mi
                 - name: logstash
                   replicas: 1
                   containers:
                   - name: logstash
-                    requests:
-                      cpu: 100m
-                      memory: 700Mi
                     limits:
                       cpu: 500m
                       memory: 1400Mi
+                    requests:
+                      cpu: 100m
+                      memory: 700Mi
               statefulSets:
                 - name: ncobackup
                   replicas: 1
                   containers:
                   - name: agg-gate
+                    limits:
+                      cpu: 500m
+                      memory: 512Mi
                     requests:
                       cpu: 50m
                       memory: 256Mi
-                    limits:
-                      cpu: 500m
-                      memory: 512Mi
                   - name: objserv
-                    requests:
-                      cpu: 100m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi
+                    requests:
+                      cpu: 100m
+                      memory: 512Mi
                 - name: ncoprimary
                   replicas: 1
                   containers:
                   - name: objserv
-                    requests:
-                      cpu: 125m
-                      memory: 512Mi
                     limits:
                       cpu: 500m
                       memory: 1024Mi  
+                    requests:
+                      cpu: 125m
+                      memory: 512Mi
     enabled: false
   - name: aiManager
     enabled: false
