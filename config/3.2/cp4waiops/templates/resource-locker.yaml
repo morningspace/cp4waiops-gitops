@@ -4,8 +4,6 @@ metadata:
   name: cp4waiops-resource-locker
   namespace: resource-locker-operator
 spec:
-  serviceAccountRef:
-    name: resource-locker-operator-controller-manager
   patches:
   - id: nginx-replicas
     patchTemplate: |
@@ -94,58 +92,6 @@ spec:
                         requests:
                           cpu: 100m
                           memory: 100Mi
-        kafka:
-          entityOperator:
-            tlsSidecar:
-              resources:
-                limits:
-                  cpu: 500m
-                  memory: 128Mi
-                requests:
-                  cpu: 100m
-                  memory: 64Mi
-            topicOperator:
-              resources:
-                limits:
-                  cpu: 500m
-                  memory: 256Mi
-                requests:
-                  cpu: 100m
-                  memory: 256Mi
-            userOperator:
-              resources:
-                limits:
-                  cpu: 500m
-                  memory: 256Mi
-                requests:
-                  cpu: 100m
-                  memory: 256Mi
-          kafka:
-            config:
-              default.replication.factor: 1
-              min.insync.replicas: 1
-            replicas: 1
-            resources:
-              limits:
-                cpu: 500m
-                memory: 1Gi
-              requests:
-                cpu: 250m
-                memory: 500Mi
-            storage:
-              class: rook-cephfs
-              size: 30Gi
-          zookeeper:
-            replicas: 1
-            resources:
-              limits:
-                cpu: 1000m
-                memory: 256Mi
-              requests:
-                cpu: 50m
-                memory: 256Mi
-            storage:
-              class: rook-cephfs
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: base.automation.ibm.com/v1beta1
@@ -311,3 +257,5 @@ spec:
       kind: AIManagerMainProd
       name: aimanager
       namespace: {{.Values.spec.cp4waiops_namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
