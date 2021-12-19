@@ -16,6 +16,10 @@ spec:
   - name: aiopsFoundation
     enabled: true
     config:
+      - name: ibm-management-kong
+        spec:
+          kong:
+            replicas: "{{.Values.res.kong.replicas}}"
       - name: couchdb
         spec:
           couchdbcluster:

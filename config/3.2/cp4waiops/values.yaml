@@ -428,3 +428,6 @@ res:
           cpu: 250m
           memory: 1Gi
       processSize: 1gb
+
+  kong:
+    replicas: 1
