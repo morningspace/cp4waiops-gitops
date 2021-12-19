@@ -148,7 +148,7 @@ res:
     logstash:
       limits:
         cpu: 625m
-        memory: 1Gi
+        memory: 1152Mi
       requests:
         cpu: 250m
         memory: 600Mi
@@ -195,10 +195,10 @@ res:
     replicas: 1
     limits:
       cpu: 250m
-      memory: 500Mi
+      memory: 600Mi
     requests:
       cpu: 250m
-      memory: 500Mi
+      memory: 600Mi
 
   ncodlapi:
     replicas: 1
