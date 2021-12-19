@@ -15,30 +15,6 @@ spec:
       kind: Deployment
       name: aiopsedge-operator-controller-manager
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiopsanalyticsorchestrator-locker
-    patchTemplate: |
-      spec:
-        pullSecrets:
-        - ibm-entitlement-key
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: ai.ir.aiops.ibm.com/v1beta1
-      kind: AIOpsAnalyticsOrchestrator
-      name: aiops
-      namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiops-topology-service-account-locker
-    patchTemplate: |
-      imagePullSecrets:
-      - name: ibm-entitlement-key
-      metadata:
-        labels:
-          managedByUser: "true"
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: v1
-      kind: ServiceAccount
-      name: aiops-topology-service-account
-      namespace: {{.Values.spec.cp4waiops_namespace}}
   - id: aiops-ir-lifecycle-locker
     patchTemplate: |
       spec:
