@@ -28,11 +28,11 @@ spec:
           aiPlatformApiServer:
             resources:
               limits:
-                memory: "{{.Values.res.aiPlatformApiServer.limits.cpu}}"
-                cpu: "{{.Values.res.aiPlatformApiServer.limits.memory}}"
+                cpu: "{{.Values.res.aiPlatformApiServer.limits.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.limits.memory}}"
               requests:
-                memory: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
-                cpu: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
+                cpu: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
