@@ -5,47 +5,47 @@ metadata:
   namespace: resource-locker-operator
 spec:
   patches:
-  - id: nginx-replicas
+  - id: nginx-locker
     patchTemplate: |
       spec:
-        replicas: 1
+        replicas: {{.Values.res.nginx.replicas}}
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: ibm-nginx
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: usermgmt-replicas
+  - id: usermgmt-locker
     patchTemplate: |
       spec:
-        replicas: 1
+        replicas: {{.Values.res.usermgmt.replicas}}
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: usermgmt
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: zen-core-replicas
+  - id: zen-core-locker
     patchTemplate: |
       spec:
-        replicas: 1
+        replicas: {{.Values.res.zencore.replicas}}
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: zen-core
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: zen-core-api-replicas
+  - id: zen-core-api-locker
     patchTemplate: |
       spec:
-        replicas: 1
+        replicas: {{.Values.res.zencoreapi.replicas}}
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: zen-core-api
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: automationbase-custom-profile
+  - id: automationbase-locker
     patchTemplate: |
       spec:
         elasticsearch:
@@ -56,96 +56,86 @@ spec:
               - key: node.data
                 value: "true"
               name: aiops
-              replicas: 1
-              storage:
-                class: rook-cephfs
+              replicas: {{.Values.res.elasticsearch.replicas}}
               template:
                 pod:
                   spec:
                     containers:
                     - env:
                       - name: ES_JAVA_OPTS
-                        value: -Xms512M -Xmx512M
+                        value: "{{.Values.res.elasticsearch.javaOps}}"
                       name: elasticsearch
                       resources:
                         limits:
-                          cpu: 500m
-                          memory: 1Gi
+                          cpu: "{{.Values.res.elasticsearch.elasticsearch.limits.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.elasticsearch.limits.memory}}"
                         requests:
-                          cpu: 250m
-                          memory: 1Gi
+                          cpu: "{{.Values.res.elasticsearch.elasticsearch.requests.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.elasticsearch.requests.memory}}"
                     - name: tls-proxy
                       resources:
                         limits:
-                          cpu: 500m
-                          memory: 200Mi
+                          cpu: "{{.Values.res.elasticsearch.tlsproxy.limits.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.tlsproxy.limits.memory}}"
                         requests:
-                          cpu: 100m
-                          memory: 100Mi
+                          cpu: "{{.Values.res.elasticsearch.tlsproxy.requests.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.tlsproxy.requests.memory}}"
         kafka:
           entityOperator:
             tlsSidecar:
               resources:
                 limits:
-                  cpu: 500m
-                  memory: 128Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.memory}}"
                 requests:
-                  cpu: 100m
-                  memory: 64Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.memory}}"
             topicOperator:
               resources:
                 limits:
-                  cpu: 500m
-                  memory: 256Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.limits.memory}}"
                 requests:
-                  cpu: 100m
-                  memory: 256Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.requests.memory}}"
             userOperator:
               resources:
                 limits:
-                  cpu: 500m
-                  memory: 256Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.limits.memory}}"
                 requests:
-                  cpu: 100m
-                  memory: 256Mi
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.requests.memory}}"
           kafka:
-            config:
-              default.replication.factor: 1
-              min.insync.replicas: 1
-            replicas: 1
+            replicas: {{.Values.res.kafka.kafka.replicas}}
             resources:
               limits:
-                cpu: 500m
-                memory: 1Gi
+                cpu: "{{.Values.res.kafka.kafka.limits.cpu}}"
+                memory: "{{.Values.res.kafka.kafka.limits.memory}}"
               requests:
-                cpu: 250m
-                memory: 500Mi
-            storage:
-              class: rook-cephfs
-              size: 30Gi
+                cpu: "{{.Values.res.kafka.kafka.requests.cpu}}"
+                memory: "{{.Values.res.kafka.kafka.requests.memory}}"
           zookeeper:
-            replicas: 1
+            replicas: {{.Values.res.kafka.zookeeper.replicas}}
             resources:
               limits:
-                cpu: 1000m
-                memory: 256Mi
+                cpu: "{{.Values.res.kafka.zookeeper.limits.cpu}}"
+                memory: "{{.Values.res.kafka.zookeeper.limits.memory}}"
               requests:
-                cpu: 50m
-                memory: 256Mi
-            storage:
-              class: rook-cephfs
+                cpu: "{{.Values.res.kafka.zookeeper.requests.cpu}}"
+                memory: "{{.Values.res.kafka.zookeeper.requests.memory}}"
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: base.automation.ibm.com/v1beta1
       kind: AutomationBase
       name: automationbase-sample
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: cp4waiops-eventprocessor-custom-profile
+  - id: cp4waiops-eventprocessor-locker
     patchTemplate: |
       spec:
         flink:
           jobManager: 
-            replicas: 1
+            replicas: {{.Values.res.flink.jobmanager.replicas}}
             template:
               pod:
                 spec:
@@ -153,27 +143,27 @@ spec:
                   - name: jobmanager
                     resources:
                       limits:
-                        cpu: 750m
-                        memory: 768Mi
+                        cpu: "{{.Values.res.flink.jobmanager.jobmanager.limits.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.jobmanager.limits.memory}}"
                       requests:
-                        cpu: 100m
-                        memory: 768Mi
+                        cpu: "{{.Values.res.flink.jobmanager.jobmanager.requests.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.jobmanager.requests.memory}}"
                   - name: tls-proxy
                     resources:
                       limits:
-                        cpu: 500m
-                        memory: 512Mi
+                        cpu: "{{.Values.res.flink.jobmanager.tlsproxy.limits.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.tlsproxy.limits.memory}}"
                       requests:
-                        cpu: 100m
-                        memory: 256Mi
+                        cpu: "{{.Values.res.flink.jobmanager.tlsproxy.requests.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.tlsproxy.requests.memory}}"
           properties:
-             jobmanager.memory.heap.size: 256mb
-             jobmanager.memory.jvm-metaspace.size: 64mb
-             taskmanager.memory.heap.size: 800mb
-             taskmanager.memory.managed.size: 102mb
-             taskmanager.numberOfTaskSlots: "8"
+             jobmanager.memory.heap.size: "{{.Values.res.flink.jobmanager.heapSize}}"
+             jobmanager.memory.jvm-metaspace.size: "{{.Values.res.flink.jobmanager.jvmMetaSpaceSize}}"
+             taskmanager.memory.heap.size: "{{.Values.res.flink.taskmanager.heapSize}}"
+             taskmanager.memory.managed.size: "{{.Values.res.flink.taskmanager.managedSize}}"
+             taskmanager.numberOfTaskSlots: "{{.Values.res.flink.taskmanager.numberOfTaskSlots}}"
           taskManager:
-            replicas: 1
+            replicas: {{.Values.res.flink.taskmanager.replicas}}
             template:
               pod:
                 spec:
@@ -181,11 +171,11 @@ spec:
                   - name: taskmanager
                     resources:
                       limits:
-                        cpu: "1"
-                        memory: 1200Mi
+                        cpu: {{.Values.res.flink.taskmanager.taskmanager.limits.cpu}}
+                        memory: {{.Values.res.flink.taskmanager.taskmanager.limits.memory}}
                       requests:
-                        cpu: 500m
-                        memory: 1200Mi
+                        cpu: {{.Values.res.flink.taskmanager.taskmanager.requests.cpu}}
+                        memory: {{.Values.res.flink.taskmanager.taskmanager.requests.memory}}
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: eventprocessing.automation.ibm.com/v1beta1

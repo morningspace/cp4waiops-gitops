@@ -5,34 +5,34 @@ metadata:
   namespace: resource-locker-operator
 spec:
   patches:
-  - id: aimanager-custom-profile
+  - id: aimanager-locker
     patchTemplate: |
       spec:
         helmValues:
           changeRisk:
             resources:
               limits:
-                cpu: 750m
-                memory: 1400Mi
+                cpu: "{{.Values.res.changeRisk.limits.cpu}}"
+                memory: "{{.Values.res.changeRisk.limits.memory}}"
               requests:
-                cpu: 500m
-                memory: 1000Mi
+                cpu: "{{.Values.res.changeRisk.requests.cpu}}"
+                memory: "{{.Values.res.changeRisk.requests.memory}}"
           logAnomaly:
             resources:
               limits:
-                cpu: 500m
-                memory: 1024Mi
+                cpu: "{{.Values.res.logAnomaly.limits.cpu}}"
+                memory: "{{.Values.res.logAnomaly.limits.memory}}"
               requests:
-                cpu: 250m
-                memory: 256Mi
+                cpu: "{{.Values.res.logAnomaly.requests.cpu}}"
+                memory: "{{.Values.res.logAnomaly.requests.memory}}"
           aiPlatformApiServer:
             resources:
-              requests:
-                memory: 512Mi
-                cpu: 100m
               limits:
-                memory: 1Gi
-                cpu: 200m
+                memory: "{{.Values.res.aiPlatformApiServer.limits.cpu}}"
+                cpu: "{{.Values.res.aiPlatformApiServer.limits.memory}}"
+              requests:
+                memory: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
+                cpu: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1

@@ -5,17 +5,17 @@ metadata:
   namespace: resource-locker-operator
 spec:
   patches:
-  - id: aiopsedge-operator-controller-manager-replicas
+  - id: aiopsedge-operator-controller-manager-locker
     patchTemplate: |
       spec:
-        replicas: 1
+        replicas: {{.Values.res.aiopsedgeOperator.replicas}}
     patchType: application/strategic-merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: Deployment
       name: aiopsedge-operator-controller-manager
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiopsanalyticsorchestrator-image-pull-secret
+  - id: aiopsanalyticsorchestrator-locker
     patchTemplate: |
       spec:
         pullSecrets:
@@ -26,7 +26,7 @@ spec:
       kind: AIOpsAnalyticsOrchestrator
       name: aiops
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: sa-image-pull-secret
+  - id: aiops-topology-service-account-locker
     patchTemplate: |
       imagePullSecrets:
       - name: ibm-entitlement-key
@@ -39,12 +39,12 @@ spec:
       kind: ServiceAccount
       name: aiops-topology-service-account
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aiops-ir-lifecycle-custom-profile
+  - id: aiops-ir-lifecycle-locker
     patchTemplate: |
       spec:
         flink:
           jobManager: 
-            replicas: 1
+            replicas: {{.Values.res.irflink.jobmanager.replicas}}
             template:
               pod:
                 spec:
@@ -52,24 +52,24 @@ spec:
                   - name: jobmanager
                     resources:
                       limits:
-                        cpu: 600m
-                        memory: 768Mi
+                        cpu: "{{.Values.res.irflink.jobmanager.jobmanager.limits.cpu}}"
+                        memory: "{{.Values.res.irflink.jobmanager.jobmanager.limits.memory}}"
                       requests:
-                        cpu: 100m
-                        memory: 512Mi
+                        cpu: "{{.Values.res.irflink.jobmanager.jobmanager.requests.cpu}}"
+                        memory: "{{.Values.res.irflink.jobmanager.jobmanager.requests.memory}}"
                   - name: tls-proxy
                     resources:
                       limits:
-                        cpu: 500m
-                        memory: 512Mi
+                        cpu: "{{.Values.res.irflink.jobmanager.tlsproxy.limits.cpu}}"
+                        memory: "{{.Values.res.irflink.jobmanager.tlsproxy.limits.memory}}"
                       requests:
-                        cpu: 100m
-                        memory: 256Mi
+                        cpu: "{{.Values.res.irflink.jobmanager.tlsproxy.requests.cpu}}"
+                        memory: "{{.Values.res.irflink.jobmanager.tlsproxy.requests.memory}}"
           properties:
-             jobmanager.memory.process.size: 768mb
-             taskmanager.memory.process.size: 1gb
+             jobmanager.memory.process.size: "{{.Values.res.irflink.jobmanager.processSize}}"
+             taskmanager.memory.process.size: "{{.Values.res.irflink.taskmanager.processSize}}"
           taskManager:
-            replicas: 1
+            replicas: {{.Values.res.irflink.taskmanager.replicas}}
             template:
               pod:
                 spec:
@@ -77,11 +77,11 @@ spec:
                   - name: taskmanager
                     resources:
                       limits:
-                        cpu: 500m
-                        memory: 1Gi
+                        cpu: "{{.Values.res.irflink.taskmanager.taskmanager.limits.cpu}}"
+                        memory: "{{.Values.res.irflink.taskmanager.taskmanager.limits.memory}}"
                       requests:
-                        cpu: 250m
-                        memory: 1Gi
+                        cpu: "{{.Values.res.irflink.taskmanager.taskmanager.requests.cpu}}"
+                        memory: "{{.Values.res.irflink.taskmanager.taskmanager.requests.memory}}"
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: eventprocessing.automation.ibm.com/v1beta1
