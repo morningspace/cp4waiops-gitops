@@ -14,7 +14,7 @@ spec:
     accept: true
   pakModules:
   - name: aiopsFoundation
-    enabled: false
+    enabled: true
     config:
       - name: couchdb
         spec:
@@ -264,6 +264,6 @@ spec:
                     requests:
                       cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
                       memory: "{{.Values.res.ncoprimary.requests.memory}}"
-    enabled: false
+    enabled: true
   - name: aiManager
-    enabled: false
+    enabled: true
