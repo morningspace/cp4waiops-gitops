@@ -48,6 +48,9 @@ spec:
   ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
   storageClassLargeBlock: rook-cephfs
 
+  ## installationName is the Installation CR name for CP4WAIOps
+  installationName: aiops-installation
+
 res:
   cassandra:
     replicas: 1
