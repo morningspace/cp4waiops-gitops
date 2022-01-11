@@ -40,7 +40,7 @@ spec:
         hs.status = "Progressing"
         hs.message = ""
         if obj.status ~= nil then
-          if obj.status.phase == "Running" and obj.status.locations.cloudPakUiUrl != nil and obj.status.locations.csAdminHubUrl != nil then
+          if obj.status.phase == "Running" and obj.status.locations.cloudPakUiUrl ~= nil and obj.status.locations.csAdminHubUrl ~= nil then
             hs.status = "Healthy"
           end
         end
