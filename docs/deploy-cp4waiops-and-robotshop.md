@@ -1,3 +1,25 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Deploy Extremely Small CP4WAIOps with Sample App for Trial Use](#deploy-extremely-small-cp4waiops-with-sample-app-for-trial-use)
+  - [Prepare Environment](#prepare-environment)
+  - [Deploy Argo CD](#deploy-argo-cd)
+  - [Deploy Ceph Storage](#deploy-ceph-storage)
+  - [Deploy CP4WAIOps](#deploy-cp4waiops)
+  - [Deploy Robot Shop](#deploy-robot-shop)
+  - [Deploy Humio and Fluent Bit](#deploy-humio-and-fluent-bit)
+  - [Deploy Istio](#deploy-istio)
+  - [Access Applications](#access-applications)
+  - [Demo: Log Anomaly Detection](#demo-log-anomaly-detection)
+    - [Define dynamic template to create resource groups for each service in robot-shop](#define-dynamic-template-to-create-resource-groups-for-each-service-in-robot-shop)
+    - [Create the sample application](#create-the-sample-application)
+    - [Enable Humio Live Log and Trigger Applicaton Story/Alert](#enable-humio-live-log-and-trigger-applicaton-storyalert)
+    - [Inject `401` issue into `ratings` service in robot-shop](#inject-401-issue-into-ratings-service-in-robot-shop)
+    - [Verify Log Anomaly Detecting in Application](#verify-log-anomaly-detecting-in-application)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Deploy Extremely Small CP4WAIOps with Sample App for Trial Use
 
 This tutorial is aimed to work you through the steps to deploy an extremely small Cloud Pak for Watson AIOps (CP4WAIOps) with Robot Shop as sample application for trial use. It includes:
@@ -207,11 +229,9 @@ Creating an application involves selecting the groups of resources to compose th
 - (Optional) Remove any groups that you do not want in the application.
 - Click `Create`. The application is added to the  list of all applications on the dashboard, and if selected, to the list  of favorite applications.
 
-## Enable Humio Live Log and Trigger Applicaton Story/Alert
+### Enable Humio Live Log and Trigger Applicaton Story/Alert
 
-### Enable Humio live log 
-
-In WAIOPS Web UI:
+To enable Humio live log, in WAIOPS Web UI:
 
 - From the `Data and tool integrations` page, click integration list in the Humio tile under Logs category
 - Select the robot-shop sample app Humio integration  `humio-robot-shop`  in  list created by ansible playbook
