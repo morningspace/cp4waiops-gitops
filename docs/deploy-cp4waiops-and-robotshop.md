@@ -12,11 +12,11 @@
   - [Deploy Istio](#deploy-istio)
   - [Access Applications](#access-applications)
   - [Demo: Log Anomaly Detection](#demo-log-anomaly-detection)
-    - [Define dynamic template to create resource groups for each service in robot-shop](#define-dynamic-template-to-create-resource-groups-for-each-service-in-robot-shop)
-    - [Create the sample application](#create-the-sample-application)
-    - [Enable Humio Live Log and Trigger Applicaton Story/Alert](#enable-humio-live-log-and-trigger-applicaton-storyalert)
-    - [Inject `401` issue into `ratings` service in robot-shop](#inject-401-issue-into-ratings-service-in-robot-shop)
-    - [Verify Log Anomaly Detecting in Application](#verify-log-anomaly-detecting-in-application)
+    - [Define dynamic template to create resource groups for each service in Robot Shop](#define-dynamic-template-to-create-resource-groups-for-each-service-in-robot-shop)
+    - [Create application for Robot Shop](#create-application-for-robot-shop)
+    - [Enable Humio live log and trigger applicaton story/alert](#enable-humio-live-log-and-trigger-applicaton-storyalert)
+    - [Inject 401 issue into ratings service in Robot Shop](#inject-401-issue-into-ratings-service-in-robot-shop)
+    - [Verify log anomaly detecting in application](#verify-log-anomaly-detecting-in-application)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -201,7 +201,7 @@ kubectl -n humio-logging get secret developer-user-password -o jsonpath="{.data.
 
 ## Demo: Log Anomaly Detection
 
-### Define dynamic template to create resource groups for each service in robot-shop
+### Define dynamic template to create resource groups for each service in Robot Shop
 
 - From the main navigation, click `Application management`.
 - From the Application management page, launch the template manager by clicking the rightmost icon `Group templates` in the upper right side corner. The page for creating an template is displayed.
@@ -215,7 +215,7 @@ kubectl -n humio-logging get secret developer-user-password -o jsonpath="{.data.
 | Tag                   | robots
 | Search for a resource to get started | Type `web` and you'll see a list of hits, choose `web service`, navigate using the right-click menus and use `Get neighbors` and choose `Pod`, then `Get neighbors` and choose `server`.
 
-### Create the sample application
+### Create application for Robot Shop
 
 Creating an application involves selecting the groups of resources to compose the application.
 
@@ -229,7 +229,7 @@ Creating an application involves selecting the groups of resources to compose th
 - (Optional) Remove any groups that you do not want in the application.
 - Click `Create`. The application is added to the  list of all applications on the dashboard, and if selected, to the list  of favorite applications.
 
-### Enable Humio Live Log and Trigger Applicaton Story/Alert
+### Enable Humio live log and trigger applicaton story/alert
 
 To enable Humio live log, in WAIOPS Web UI:
 
@@ -239,7 +239,7 @@ To enable Humio live log, in WAIOPS Web UI:
 
 Wait 30 minutes to let log flow into.
 
-### Inject `401` issue into `ratings` service in robot-shop
+### Inject 401 issue into ratings service in Robot Shop
 
 To simulating HTTP issue, an istio VirtualService with HTTP RC 401 is created to simulate HTTP unauthorized issue on `ratings`:
 
@@ -267,7 +267,7 @@ spec:
 
 In robot-shop web UI, in categories, click `Watson` and rate it to trigger the `401` issue. Repeat several for other robot.
 
-### Verify Log Anomaly Detecting in Application 
+### Verify log anomaly detecting in application
 
 For application story, in defined application `robot-shop-app`,  stories can be found per detected abnormal logs.
 
