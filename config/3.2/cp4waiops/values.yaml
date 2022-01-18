@@ -1,6 +1,6 @@
 ---
 ###################################
-# CP4WAIOps - Common Configs
+# Common Configuration
 ###################################
 spec:
 
@@ -50,6 +50,10 @@ spec:
 
   ## installationName is the Installation CR name for CP4WAIOps
   installationName: aiops-installation
+
+###################################
+# Custom Profile Configuration
+###################################
 
 res:
   cassandra:
