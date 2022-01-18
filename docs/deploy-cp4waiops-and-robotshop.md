@@ -22,6 +22,8 @@
 
 # Deploy Extremely Small CP4WAIOps with Sample App for Trial Use
 
+> Note: This is mainly used for sandbox with restricted cpu and memory to deploy CP4WAIOps for PoC, demo, or dev environment. It is not for production use. The steps are verified on CP4WAIOps v3.2.
+
 This tutorial is aimed to work you through the steps to deploy an extremely small Cloud Pak for Watson AIOps (CP4WAIOps) with Robot Shop as sample application for trial use. It includes:
 
 - How to deploy CP4WAIOps with custom sized profile using Argo CD.
