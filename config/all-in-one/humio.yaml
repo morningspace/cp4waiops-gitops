@@ -25,11 +25,7 @@ spec:
         helm:
           parameters:
             - name: humio-core.openshift.host
-              value: ${TARGET_CLUSTER_DOMAIN}
-        plugin:
-          env:
-            - name: TARGET_CLUSTER_DOMAIN
-              value: REPLACE_BY_YOUR_OWN_VALUE
+              value: TARGET_CLUSTER_DOMAIN
       syncPolicy:
         automated:
           prune: true
