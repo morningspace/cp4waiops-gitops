@@ -20,7 +20,7 @@ spec:
       project: default
       source:
         chart: resource-locker-operator
-        repoURL: https://github.com/infra-team/cluster-deployments.git
+        repoURL: https://redhat-cop.github.io/resource-locker-operator
         targetRevision: v1.1.3
       syncPolicy:
         automated:
