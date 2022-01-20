@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: config/argocd
+    path: config/3.2/argocd
     repoURL: https://github.com/morningspace/cp4waiops-gitops
     targetRevision: dev
   syncPolicy:
