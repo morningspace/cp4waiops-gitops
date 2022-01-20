@@ -12,11 +12,11 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{cluster}}-rook-ceph'
+      name: '{{name}}-rook-ceph'
     spec:
       destination:
         namespace: rook-ceph
-        server: '{{url}}'
+        server: '{{server}}'
       project: default
       source:
         path: ceph

@@ -12,11 +12,11 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{cluster}}-humio-logging'
+      name: '{{name}}-humio-logging'
     spec:
       destination:
         namespace: humio-logging
-        server: '{{url}}'
+        server: '{{server}}'
       project: default
       source:
         path: gitops-charts/humio-helm-charts

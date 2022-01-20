@@ -12,11 +12,11 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{cluster}}-robot-shop'
+      name: '{{name}}-robot-shop'
     spec:
       destination:
         namespace: robot-shop
-        server: '{{url}}'
+        server: '{{server}}'
       project: default
       source:
         path: K8s/helm

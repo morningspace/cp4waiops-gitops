@@ -12,11 +12,11 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{cluster}}-resource-locker'
+      name: '{{name}}-resource-locker'
     spec:
       destination:
         namespace: resource-locker-operator
-        server: '{{url}}'
+        server: '{{server}}'
       project: default
       source:
         chart: resource-locker-operator
