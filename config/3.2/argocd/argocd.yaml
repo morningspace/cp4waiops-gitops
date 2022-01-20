@@ -2,6 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - argoproj.io/finalizer
   name: openshift-gitops
