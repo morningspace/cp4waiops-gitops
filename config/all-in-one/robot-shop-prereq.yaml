@@ -12,7 +12,7 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-rook-ceph'
+      name: '{{name}}-robot-shop'
     spec:
       destination:
         namespace: robot-shop
