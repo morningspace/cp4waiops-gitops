@@ -25,7 +25,9 @@ spec:
         helm:
           parameters:
             - name: humio-core.openshift.host
-              value: TARGET_CLUSTER_DOMAIN
+              value: target_cluster_domain
+            - name: humio-fluentbit.humioReleaseName
+              value: '{{name}}-humio-logging'
       syncPolicy:
         automated:
           prune: true
