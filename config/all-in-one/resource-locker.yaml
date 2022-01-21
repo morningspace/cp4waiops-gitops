@@ -1,9 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: resource-locker
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
+  name: resource-lockers
 spec:
   generators:
   - clusters:
@@ -13,6 +11,8 @@ spec:
   template:
     metadata:
       name: '{{name}}-resource-locker'
+      annotations:
+        argocd.argoproj.io/sync-wave: "100"
     spec:
       destination:
         namespace: resource-locker-operator

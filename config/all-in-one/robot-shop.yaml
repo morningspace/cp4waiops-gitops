@@ -1,9 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: robot-shop
-  annotations:
-    argocd.argoproj.io/sync-wave: "250"
+  name: robot-shops
 spec:
   generators:
   - clusters:
@@ -13,6 +11,8 @@ spec:
   template:
     metadata:
       name: '{{name}}-robot-shop'
+      annotations:
+        argocd.argoproj.io/sync-wave: "250"
     spec:
       destination:
         namespace: robot-shop

@@ -1,9 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: humio-logging
-  annotations:
-    argocd.argoproj.io/sync-wave: "200"
+  name: humio-loggings
 spec:
   generators:
   - clusters:
@@ -13,6 +11,8 @@ spec:
   template:
     metadata:
       name: '{{name}}-humio-logging'
+      annotations:
+        argocd.argoproj.io/sync-wave: "200"
     spec:
       destination:
         namespace: humio-logging
@@ -20,7 +20,7 @@ spec:
       project: default
       source:
         path: gitops-charts/humio-helm-charts
-        repoURL: https://github.com/cloud-pak-gitops/sample-app-gitops
+        repoURL: https://github.com/morningspace/sample-app-gitops
         targetRevision: HEAD
         helm:
           parameters:
