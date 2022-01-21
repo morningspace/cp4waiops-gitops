@@ -59,7 +59,7 @@ Create an Argo Application named `argocd-custom` using below field values to cus
 | Sync Policy           | Automatic                                             |
 | Repository URL        | https://github.com/morningspace/cp4waiops-gitops      |
 | Revision              | dev                                                   |
-| Path                  | config/argocd                                         |
+| Path                  | config/3.2/argocd/openshift                           |
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
 
@@ -123,6 +123,7 @@ Create Argo Application `robot-shop-prereq` and `robot-shop` using below field v
 | Application Name      | robot-shop-prereq                                     |
 | Project               | default                                               |
 | Sync Policy           | Automatic                                             |
+| Sync Option           | CreateNamespace=true                                  |
 | Repository URL        | https://github.com/morningspace/sample-app-gitops     |
 | Revision              | HEAD                                                  |
 | Path                  | config/apps/robot-shop                                |
