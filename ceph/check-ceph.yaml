@@ -1,0 +1,62 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rook-ceph-job
+  namespace: rook-ceph
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-job
+  namespace: rook-ceph
+rules:
+- apiGroups: ["ceph.rook.io"]
+  resources: ["cephclusters", "cephfilesystems"]
+  verbs: [ "get", "list" ]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-job
+  namespace: rook-ceph
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-job
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-job
+  namespace: rook-ceph
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  name: check-ceph
+  namespace: rook-ceph
+spec:
+  template:
+    spec:
+      containers:
+        - name: config
+          image: quay.io/openshift/origin-cli:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -x
+
+              while : ; do
+                if [[ "$(oc get cephfilesystem,cephcluster -n rook-ceph -ojsonpath={.items[*].status.phase})" == "Ready Ready" ]]; then
+                  echo "INFO: Ceph FileSystem and Ceph Cluster are ready."
+                  exit 0
+                fi
+                echo "INFO: Ceph FileSystem or Ceph Cluster is not ready, waiting."
+                sleep 10
+              done
+      restartPolicy: Never
+      serviceAccountName: rook-ceph-job
+  backoffLimit: 10
