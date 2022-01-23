@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'robot-shop-prereq'
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  destination:
+    namespace: robot-shop
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: config/apps/robot-shop
+    repoURL: https://github.com/morningspace/sample-app-gitops
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
