@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: humio-logging
     server: 'https://kubernetes.default.svc'
-    project: default
+  project: default
   source:
     path: gitops-charts/humio-helm-charts
     repoURL: https://github.com/morningspace/sample-app-gitops
