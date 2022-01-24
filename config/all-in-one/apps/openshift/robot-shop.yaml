@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: 'robot-shop'
   annotations:
-    argocd.argoproj.io/sync-wave: "250"
+    argocd.argoproj.io/sync-wave: "200"
 spec:
   destination:
     namespace: robot-shop

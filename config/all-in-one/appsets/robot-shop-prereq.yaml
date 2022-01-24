@@ -12,7 +12,7 @@ spec:
     metadata:
       name: '{{name}}-robot-shop-prereq'
       annotations:
-        argocd.argoproj.io/sync-wave: "200"
+        argocd.argoproj.io/sync-wave: "150"
     spec:
       destination:
         namespace: robot-shop
