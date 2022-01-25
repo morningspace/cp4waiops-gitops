@@ -20,16 +20,16 @@ spec:
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: K8s/helm
-        repoURL: https://github.com/instana/robot-shop
+        path: gitops-charts/robot-shop
+        repoURL: https://github.com/morningspace/sample-app-gitops
         targetRevision: HEAD
         helm:
           parameters:
-            - name: nodeport
+            - name: 'robot-shop.nodeport'
               value: 'true'
-            - name: ocCreateRoute
+            - name: 'robot-shop.ocCreateRoute'
               value: 'true'
-            - name: openshift
+            - name: 'robot-shop.openshift'
               value: 'true'
       syncPolicy:
         automated:
