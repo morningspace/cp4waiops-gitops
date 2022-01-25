@@ -4,6 +4,7 @@ argocd:
   namespace: argocd
   
 cp4waiops:
+  enabled: true
   dockerPassword: REPLACE_IT
 
 sampleapp:
