@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rook-cephs
+  name: cp4waiops
 spec:
   generators:
   - clusters:
@@ -10,18 +10,22 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-rook-ceph'
+      name: '{{ `{{name}}-cp4waiops` }}'
       annotations:
-        argocd.argoproj.io/sync-wave: "100"
+        argocd.argoproj.io/sync-wave: "200"
     spec:
       destination:
-        namespace: rook-ceph
-        server: '{{server}}'
+        namespace: cp4waiops
+        server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: ceph
+        path: config/3.2/cp4waiops
         repoURL: https://github.com/morningspace/cp4waiops-gitops
         targetRevision: dev
+        helm:
+          parameters:
+            - name: dockerPassword
+              value: '{{ .Values.cp4waiops.dockerPassword }}'
       syncPolicy:
         automated:
           prune: true

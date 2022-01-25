@@ -1,0 +1,11 @@
+---
+argocd:
+  cluster: kubernetes
+  namespace: argocd
+  
+cp4waiops:
+  dockerPassword: REPLACE_IT
+
+sampleapp:
+  enabled: true
+  clusterDomain: REPLACE_IT

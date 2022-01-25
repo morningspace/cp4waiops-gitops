@@ -10,13 +10,13 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-resource-locker'
+      name: '{{ `{{name}}-resource-locker` }}'
       annotations:
         argocd.argoproj.io/sync-wave: "100"
     spec:
       destination:
         namespace: resource-locker-operator
-        server: '{{server}}'
+        server: '{{ `{{server}}` }}'
       project: default
       source:
         chart: resource-locker-operator

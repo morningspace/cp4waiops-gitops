@@ -6,11 +6,11 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   destination:
-    namespace: argocd
+    namespace: {{ .Values.argocd.namespace }}
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: config/3.2/argocd/kubernetes
+    path: config/3.2/argocd/{{ .Values.argocd.cluster }}
     repoURL: https://github.com/morningspace/cp4waiops-gitops
     targetRevision: dev
   syncPolicy:

@@ -10,13 +10,13 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-humio-logging'
+      name: '{{ `{{name}}-humio-logging` }}'
       annotations:
         argocd.argoproj.io/sync-wave: "200"
     spec:
       destination:
         namespace: humio-logging
-        server: '{{server}}'
+        server: '{{ `{{server}}` }}'
       project: default
       source:
         path: gitops-charts/humio-helm-charts
@@ -25,9 +25,9 @@ spec:
         helm:
           parameters:
             - name: humio-core.openshift.host
-              value: target_cluster_domain
+              value: {{ .Values.sampleapp.clusterDomain }}
             - name: humio-fluentbit.humioReleaseName
-              value: '{{name}}-humio-logging'
+              value: '{{ `{{name}}-humio-logging` }}'
       syncPolicy:
         automated:
           prune: true

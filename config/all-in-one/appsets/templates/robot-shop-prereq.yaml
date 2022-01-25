@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: robot-shops
+  name: robot-shop-prereqs
 spec:
   generators:
   - clusters:
@@ -10,26 +10,18 @@ spec:
           argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-robot-shop'
+      name: '{{ `{{name}}-robot-shop-prereq` }}'
       annotations:
-        argocd.argoproj.io/sync-wave: "200"
+        argocd.argoproj.io/sync-wave: "150"
     spec:
       destination:
         namespace: robot-shop
-        server: '{{server}}'
+        server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: K8s/helm
-        repoURL: https://github.com/instana/robot-shop
+        path: config/apps/robot-shop
+        repoURL: https://github.com/morningspace/sample-app-gitops
         targetRevision: HEAD
-        helm:
-          parameters:
-            - name: nodeport
-              value: 'true'
-            - name: ocCreateRoute
-              value: 'true'
-            - name: openshift
-              value: 'true'
       syncPolicy:
         automated:
           prune: true
