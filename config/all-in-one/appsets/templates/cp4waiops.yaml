@@ -24,7 +24,7 @@ spec:
         targetRevision: dev
         helm:
           parameters:
-            - name: dockerPassword
+            - name: spec.dockerPassword
               value: '{{ .Values.cp4waiops.dockerPassword }}'
       syncPolicy:
         automated:
