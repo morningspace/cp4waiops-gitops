@@ -9,7 +9,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: check-sc
+  name: {{ .Release.Name }}-check-sc
   annotations:
     argocd.argoproj.io/sync-wave: "-1000"
 rules:
@@ -21,13 +21,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: check-sc
+  name: {{ .Release.Name }}-check-sc
   annotations:
     argocd.argoproj.io/sync-wave: "-1000"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: check-sc
+  name: {{ .Release.Name }}-check-sc
 subjects:
 - kind: ServiceAccount
   name: check-sc
