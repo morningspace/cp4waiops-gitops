@@ -1,0 +1,32 @@
+{{- if .Values.sampleapp.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istios
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  template:
+    metadata:
+      name: '{{ `{{name}}-istio` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "200"
+    spec:
+      destination:
+        namespace: istio-system
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: gitops-charts/istio
+        repoURL: https://github.com/morningspace/sample-app-gitops
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+{{- end }}
