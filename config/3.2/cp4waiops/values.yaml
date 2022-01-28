@@ -188,7 +188,7 @@ res:
       cpu: "1"
       memory: 2048Mi
     requests:
-      cpu: 800m
+      cpu: 400m
       memory: 750Mi
   sparkworker:
     replicas: 1
