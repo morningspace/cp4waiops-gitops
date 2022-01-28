@@ -290,13 +290,13 @@ res:
   logAnomaly:
     limits:
       cpu: 500m
-      memory: 1024Mi
+      memory: 2048Mi
     requests:
       cpu: 250m
       memory: 256Mi
   aiPlatformApiServer:
     limits:
-      memory: 1Gi
+      memory: 2Gi
       cpu: 200m
     requests:
       memory: 512Mi
