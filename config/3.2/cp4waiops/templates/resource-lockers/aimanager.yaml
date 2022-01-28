@@ -33,6 +33,13 @@ spec:
               requests:
                 cpu: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
                 memory: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
+          global:
+            logAnomaly:
+              replicas: 1
+          modeltrain:
+            dlaasRatelimiter:
+              config:
+                maxLearners: 1
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
