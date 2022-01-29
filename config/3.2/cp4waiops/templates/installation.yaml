@@ -16,6 +16,11 @@ spec:
   - name: aiopsFoundation
     enabled: true
     config:
+      - name: aimanager-operator
+        spec:
+          aimanager:
+            modeltrain:
+              maxLearners: 1
       - name: ibm-management-kong
         spec:
           kong:

@@ -46,16 +46,5 @@ spec:
       kind: AIManagerMainProd
       name: aimanager
       namespace: {{.Values.spec.cp4waiops_namespace}}
-  - id: aimanager-locker
-    patchTemplate: |
-      spec:
-        modeltrain:
-          maxLearners: 1
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
-      kind: AIManager
-      name: aimanager
-      namespace: {{.Values.spec.cp4waiops_namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
