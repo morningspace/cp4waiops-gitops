@@ -5,6 +5,7 @@ argocd:
   
 cp4waiops:
   enabled: true
+  instanceName: aiops-installation
   dockerPassword: REPLACE_IT
 
 sampleapp:

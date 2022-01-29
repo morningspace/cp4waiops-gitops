@@ -27,6 +27,8 @@ spec:
           parameters:
             - name: spec.dockerPassword
               value: '{{ .Values.cp4waiops.dockerPassword }}'
+            - name: spec.installationName
+              value: '{{ .Values.cp4waiops.instanceName }}'
       syncPolicy:
         automated:
           prune: true
