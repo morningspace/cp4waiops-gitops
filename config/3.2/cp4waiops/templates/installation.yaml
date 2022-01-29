@@ -16,11 +16,6 @@ spec:
   - name: aiopsFoundation
     enabled: true
     config:
-      - name: aimanager-operator
-        spec:
-          aimanager:
-            modeltrain:
-              maxLearners: 1
       - name: ibm-management-kong
         spec:
           kong:
@@ -275,4 +270,10 @@ spec:
                       memory: "{{.Values.res.ncoprimary.requests.memory}}"
     enabled: true
   - name: aiManager
+    config:
+      - name: aimanager-operator
+        spec:
+          aimanager:
+            modeltrain:
+              maxLearners: 1
     enabled: true
