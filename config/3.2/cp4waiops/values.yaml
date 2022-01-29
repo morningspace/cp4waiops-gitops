@@ -251,7 +251,7 @@ res:
     replicas: 1
     limits:
       cpu: 500m
-      memory: 1500Mi
+      memory: 1792Mi
     requests:
       cpu: 100m
       memory: 700Mi
@@ -320,7 +320,7 @@ res:
     elasticsearch:
       limits:
         cpu: 500m
-        memory: 1Gi
+        memory: 1536Mi
       requests:
         cpu: 250m
         memory: 1Gi
