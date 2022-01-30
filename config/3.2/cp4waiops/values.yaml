@@ -180,7 +180,7 @@ res:
       cpu: 1000m
       memory: 1Gi
     requests:
-      cpu: 800m
+      cpu: 400m
       memory: 750Mi
   classifier:
     replicas: 1
@@ -202,7 +202,7 @@ res:
     replicas: 1
     limits:
       cpu: 250m
-      memory: 768Mi
+      memory: 896Mi
     requests:
       cpu: 250m
       memory: 600Mi
