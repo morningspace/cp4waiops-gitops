@@ -5,10 +5,14 @@ metadata:
   name: cp4waiops
 spec:
   generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
   - clusters:
       selector:
         matchLabels:
           argocd.argoproj.io/secret-type: cluster
+  {{- end }}
   template:
     metadata:
       name: '{{ `{{name}}-cp4waiops` }}'

@@ -2,6 +2,7 @@
 argocd:
   cluster: kubernetes
   namespace: argocd
+  allowLocalDeploy: false
   
 cp4waiops:
   enabled: true
