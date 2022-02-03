@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: check-sc
+  name: check-aiops-prereqs
   annotations:
     argocd.argoproj.io/sync-wave: "-1000"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Release.Name }}-check-sc
+  name: {{ .Release.Name }}-check-aiops-prereqs
   annotations:
     argocd.argoproj.io/sync-wave: "-1000"
 rules:
@@ -21,29 +21,29 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ .Release.Name }}-check-sc
+  name: {{ .Release.Name }}-check-aiops-prereqs
   annotations:
     argocd.argoproj.io/sync-wave: "-1000"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ .Release.Name }}-check-sc
+  name: {{ .Release.Name }}-check-aiops-prereqs
 subjects:
 - kind: ServiceAccount
-  name: check-sc
+  name: check-aiops-prereqs
   namespace: {{.Values.spec.cp4waiops_namespace}}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: check-sc
+  name: check-aiops-prereqs
   annotations:
     argocd.argoproj.io/sync-wave: "-900"
 spec:
   template:
     spec:
       containers:
-        - name: check-sc
+        - name: check-aiops-prereqs
           image: quay.io/openshift/origin-cli:latest
           command:
             - /bin/sh
@@ -60,5 +60,5 @@ spec:
                 sleep 10
               done
       restartPolicy: Never
-      serviceAccountName: check-sc
+      serviceAccountName: check-aiops-prereqs
   backoffLimit: 10
