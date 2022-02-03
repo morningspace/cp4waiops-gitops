@@ -11,15 +11,4 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops-3.2-0.1.0/cp4waiops-3.2-0.1.0.tgz
     version: 0.1.0
-  cp4waiops-instance-3.2:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-02-03T22:26:33.28072219Z"
-    description: CP4WAIops 3.2 instance
-    digest: d7e1f5372eef1910275db732168966d05323dc705f316a740be6cd99ef82d744
-    name: cp4waiops-instance-3.2
-    type: application
-    urls:
-    - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops-instance-3.2-0.1.0/cp4waiops-instance-3.2-0.1.0.tgz
-    version: 0.1.0
 generated: "2022-02-03T22:32:04.412860131Z"
