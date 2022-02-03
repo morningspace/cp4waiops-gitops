@@ -20,7 +20,7 @@ spec:
         argocd.argoproj.io/sync-wave: "200"
     spec:
       destination:
-        namespace: cp4waiops
+        namespace: '{{ .Values.cp4waiops.namespace }}'
         server: '{{ `{{server}}` }}'
       project: default
       source:
@@ -33,6 +33,8 @@ spec:
               value: '{{ .Values.cp4waiops.dockerPassword }}'
             - name: spec.installationName
               value: '{{ .Values.cp4waiops.instanceName }}'
+            - name: spec.cp4waiops_namespace
+              value: '{{ .Values.cp4waiops.namespace }}'
       syncPolicy:
         automated:
           prune: true

@@ -8,7 +8,9 @@ cp4waiops:
   enabled: true
   instanceName: aiops-installation
   dockerPassword: REPLACE_IT
+  namespace: cp4waiops
 
 sampleapp:
   enabled: true
   clusterDomain: REPLACE_IT
+  configAIOps: true
