@@ -29,4 +29,4 @@ jobs:
           version: v3.7.2
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@master
+        uses: helm/chart-releaser-action
