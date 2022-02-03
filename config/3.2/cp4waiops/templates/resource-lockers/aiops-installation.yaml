@@ -10,6 +10,7 @@ spec:
       spec:
         pakModules:
           - name: aiopsFoundation
+            enabled: true
             config:
               - name: ibm-management-kong
                 spec:
@@ -103,6 +104,7 @@ spec:
                             cpu: "{{.Values.res.redis.sentinel.proxylog.requests.cpu}}"
                             memory: "{{.Values.res.redis.sentinel.proxylog.requests.memory}}"
           - name: applicationManager
+            enabled: true
             config:
               - name: ir-lifecycle-operator
                 spec:
@@ -264,6 +266,7 @@ spec:
                               cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
                               memory: "{{.Values.res.ncoprimary.requests.memory}}"
           - name: aiManager
+            enabled: true
             config:
               - name: aimanager-operator
                 spec:
