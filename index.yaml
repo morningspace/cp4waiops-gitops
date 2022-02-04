@@ -3,6 +3,16 @@ entries:
   cp4waiops-3.2:
   - apiVersion: v1
     appVersion: "3.2"
+    created: "2022-02-04T02:19:46.082990447Z"
+    description: Cloud Pak for Watson AIOps v3.2
+    digest: af4576b2218275ab14d26fba616643dbdd4d278887a52b6c86504fd1544fffa9
+    name: cp4waiops-3.2
+    type: application
+    urls:
+    - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops-3.2-0.1.1/cp4waiops-3.2-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: "3.2"
     created: "2022-02-03T22:32:04.412853928Z"
     description: Cloud Pak for Watson AIOps v3.2
     digest: 7e6ae96293399a04b4c0c7d0cd80c5b642779b91426ec85dc77ca7fe16f9be58
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops-3.2-0.1.0/cp4waiops-3.2-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-03T22:32:04.412860131Z"
+generated: "2022-02-04T02:19:46.083009447Z"
