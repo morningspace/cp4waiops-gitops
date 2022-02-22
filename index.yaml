@@ -65,4 +65,15 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops33-eventmanager-0.1.1/cp4waiops33-eventmanager-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-22T03:44:02.339508414Z"
+  eventmanager33:
+  - apiVersion: v1
+    appVersion: "3.3"
+    created: "2022-02-22T03:45:21.973906712Z"
+    description: Cloud Pak for Watson AIOps v3.3 - EventManager
+    digest: dfdd1c374202c703b0cdc215c6c8da8d5fab8b8600598b98cc48927362f58ec3
+    name: eventmanager33
+    type: application
+    urls:
+    - https://github.com/morningspace/cp4waiops-gitops/releases/download/eventmanager33-0.1.1/eventmanager33-0.1.1.tgz
+    version: 0.1.1
+generated: "2022-02-22T03:45:21.973915212Z"
