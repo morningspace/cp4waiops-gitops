@@ -32,6 +32,17 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops32-0.1.2/cp4waiops32-0.1.2.tgz
     version: 0.1.2
+  cp4waiops33:
+  - apiVersion: v1
+    appVersion: "3.3"
+    created: "2022-02-22T03:44:02.339499214Z"
+    description: Cloud Pak for Watson AIOps v3.3 - AIManager
+    digest: f8d1788497a724a232a71c201070336feffd3f1218f20b14a57fecf3ef248a92
+    name: cp4waiops33
+    type: application
+    urls:
+    - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops33-0.1.1/cp4waiops33-0.1.1.tgz
+    version: 0.1.1
   cp4waiops33-aimanager:
   - apiVersion: v1
     appVersion: "3.3"
@@ -54,4 +65,4 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/cp4waiops33-eventmanager-0.1.1/cp4waiops33-eventmanager-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-21T12:05:26.912135942Z"
+generated: "2022-02-22T03:44:02.339508414Z"
