@@ -1,6 +1,6 @@
 ---
 apiVersion: v1
-name: cp4waiops33-eventmanager
+name: eventmanager33
 description: Cloud Pak for Watson AIOps v3.3 - EventManager
 
 # A chart can be either an 'application' or a 'library' chart.
