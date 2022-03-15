@@ -10,7 +10,7 @@ spec:
 
   ## dockerUsername is the usrname of IBM® Entitled Registry.
   ## It is used to create a docker-registry secret to enable your deployment to pull the AI Manager images 
-  ## from the IBM® Entitled Registry.
+  ## from the IBM Entitled Registry.
   ## Default is cp
   dockerUsername: cp
 
