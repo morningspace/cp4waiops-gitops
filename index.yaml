@@ -11,6 +11,17 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/aimanager32-0.0.1/aimanager32-0.0.1.tgz
     version: 0.0.1
+  aimanager33:
+  - apiVersion: v1
+    appVersion: "3.3"
+    created: "2022-04-27T14:42:18.929409764Z"
+    description: AIManager 3.3 Chart
+    digest: f4ae1cda3e79916a9b7c54d6d108b18e59a6d60dd8f984278ed111b86dd9d039
+    name: aimanager33
+    type: application
+    urls:
+    - https://github.com/morningspace/cp4waiops-gitops/releases/download/aimanager33-0.0.1/aimanager33-0.0.1.tgz
+    version: 0.0.1
   cp4waiops-3.2:
   - apiVersion: v1
     appVersion: "3.2"
@@ -118,4 +129,14 @@ entries:
     urls:
     - https://github.com/morningspace/cp4waiops-gitops/releases/download/eventmanager33-0.1.1/eventmanager33-0.1.1.tgz
     version: 0.1.1
-generated: "2022-03-24T13:55:24.775099352Z"
+  - apiVersion: v1
+    appVersion: "3.3"
+    created: "2022-04-27T14:42:19.106753926Z"
+    description: EventManager 3.3 Chart
+    digest: b4659a9b187000e5d1727b19edd22c37bd84ec52f25651f189660403ae2b8f4b
+    name: eventmanager33
+    type: application
+    urls:
+    - https://github.com/morningspace/cp4waiops-gitops/releases/download/eventmanager33-0.0.2/eventmanager33-0.0.2.tgz
+    version: 0.0.2
+generated: "2022-04-27T14:42:19.106772626Z"
