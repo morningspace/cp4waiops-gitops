@@ -27,7 +27,7 @@
 
 ## Prerequisite
 
-- OCP 4.6 + 
+- NOTE: Only OpenShift 4.6 with CP4WAIOPS 3.1 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
 - Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub
 - Install crossplane operator(Upbound Universal Crossplane (UXP)) in ocp operator-hub
 
@@ -77,7 +77,7 @@ Project: default
 SYNC POLICY: Automatic
 
 SOURCE
-REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
+REPO URL : https://github.com/IBM/cp4waiops-gitops
 Target version: HEAD
 path: config/3.1/argocd-apps/infra
 
@@ -89,7 +89,7 @@ HELM
 metadata.argocd_app_namespace: openshift-gitops
 metadata.cp4waiops_provider_namespace: upbound-system
 metadata.crossplane_namespace: upbound-system
-repoURL: https://github.com/cloud-pak-gitops/cp4waiops-gitops
+repoURL: https://github.com/IBM/cp4waiops-gitops
 ```
 
 ### Verify Crossplane Provider
@@ -150,7 +150,7 @@ Project: default
 SYNC POLICY: Automatic
 
 SOURCE
-REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
+REPO URL : https://github.com/IBM/cp4waiops-gitops
 Target version: HEAD
 path: ceph
 
@@ -189,7 +189,7 @@ Project: default
 SYNC POLICY: Automatic
 
 SOURCE
-REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
+REPO URL : https://github.com/IBM/cp4waiops-gitops
 Target version: HEAD
 path: config/3.1/cp4waiops
 

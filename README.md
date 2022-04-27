@@ -2,31 +2,32 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOPS with GitOps](#deploy-cp4waiops-with-gitops)
-  - [Supported CP4WAIOPS Versions](#supported-cp4waiops-versions)
-  - [Tutorial](#tutorial)
+- [Deploy Cloud Pak for Watson AIOps using GitOps](#deploy-cloud-pak-for-watson-aiops-using-gitops)
+  - [Supported CP4WAIOps Versions](#supported-cp4waiops-versions)
+  - [Install CP4WAIOps using GitOps](#install-cp4waiops-using-gitops)
+  - [More Install Options for CP4WAIOps using GitOps](#more-install-options-for-cp4waiops-using-gitops)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# Deploy Cloud Pak for Watson AIOps using GitOps
 
-# Deploy CP4WAIOPS with GitOps
+This repository is about using OpenShift GitOps to deployCloud Pak for Watson AIOps(CP4WAIOps) on Red Hat OpenShift Cluster. Refer to our [gitops webpage](https://ibm.github.io/cp4waiops-gitops/docs/) to check detailed document and start your toturial with gitops.
 
-This repo is about using either use OpenShift GitOps or Kubernetes GitOps model to deploy CP4WAIOPS on a Kubernetes or OpenShift Cluster.
+## Supported CP4WAIOps Versions
 
-## Supported CP4WAIOPS Versions
+- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
+- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
+- [3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0) - TECHNICAL PREVIEW FEATURE
 
-- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0)
-- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0)
+## Install CP4WAIOps using GitOps
 
-## Tutorial
+Please refer to the following documents and decide how you want to deploy CP4WAIOps:
 
-Please refer to the following tutorial to decide how you want to deploy your Instana Cluster:
+- [CP4WAIOps 3.1 Online Install](./docs/how-to-deploy-cp4waiops-31.md)
+- [CP4WAIOps 3.2 Online Install](./docs/how-to-deploy-cp4waiops-32.md)
+- [CP4WAIOps 3.2 Airgap Install](./docs/how-to-deploy-airgap-32.md)
+- [CP4WAIOps 3.3 Online Install](./docs/how-to-deploy-cp4waiops-33.md)
 
-- [3.1: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
-- [3.2: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
+## More Install Options for CP4WAIOps using GitOps
 
-## Customization Install
-
-Making changes to this repository requires a working knowledge of Argo CD administration and configuration. A change entails forking the repository, modifying it, installing the changes on a target cluster to validate them.
-
-Navigate to the [Customization Install](./docs/customization-install.md) page for the details.
+There are some advanced configuration available for CP4WAIOps to support more install scenarios. Also, as a customer, you may want to fork this repository to customize it that meets your specific needs. For more details, please refer to [Customize CP4WAIOps Install](./docs/cp4waiops-custom-install.md).
