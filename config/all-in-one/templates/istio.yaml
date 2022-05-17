@@ -26,8 +26,8 @@ spec:
       project: default
       source:
         path: gitops-charts/istio
-        repoURL: https://github.com/IBM/sample-app-gitops
-        targetRevision: HEAD
+        repoURL: {{ default "https://github.com/IBM/sample-app-gitops" .Values.istio.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.istio.targetRevision }}
       syncPolicy:
         automated:
           prune: true

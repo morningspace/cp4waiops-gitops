@@ -147,3 +147,7 @@ cp4waiops:
 
   # Specify whether or not to install Istio.
   # enabled: true
+  # Specify the GitOps repo URL for Istio deployment
+  # repoURL: REPLACE_ME
+  # Specify the target revision of the GitOps repo for Istio deployment
+  # targetRevision: REPLACE_ME
